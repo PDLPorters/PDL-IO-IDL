@@ -2,13 +2,14 @@ use ExtUtils::MakeMaker;
 use strict;
 use warnings;
 
-# With dmake a postamble is sometimes (incorrectly) written
-# in the Makefile. The following prevents that:
-undef &MY::postamble; # suppress warning
-*MY::postamble = sub { return ""; };
-
 WriteMakefile(
-     NAME => "PDL::IO::IDL",
-     VERSION_FROM => '../../Basic/PDL.pm',
-     NO_MYMETA => 1,
+  NAME => "PDL::IO::IDL",
+  VERSION_FROM => 'IDL.pm',
+  AUTHOR => 'PerlDL Developers <pdl-general@lists.sourceforge.net>',
+  CONFIGURE_REQUIRES => {
+    'ExtUtils::MakeMaker' => 0,
+  },
+  PREREQ_PM => {
+    'PDL' => '2.094',
+  },
 );
