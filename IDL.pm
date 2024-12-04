@@ -84,29 +84,26 @@ IDL objects contain compiled code.
 
 =cut
 
-  package PDL::IO::IDL;
-  
-  BEGIN {
-    
-    use Exporter ();
-    package PDL::IO::IDL;
-    @ISA = ( Exporter );
-    @EXPORT_OK = qw( ridl );
-    @EXPORT = @EXPORT_OK;
-    @EXPORT_TAGS = ( Func=>[@EXPORT_OK] );
+package PDL::IO::IDL;
 
-    our $VERSION = "0.5";
-    $VERSION = eval $VERSION;
-    
-    use PDL;
-    use PDL::Exporter;
-    use Carp;
-    
-  }
 use strict;
 use warnings;
+use Exporter ();
+package PDL::IO::IDL;
+our @ISA = qw( Exporter );
+our @EXPORT_OK = qw( ridl );
+our @EXPORT = @EXPORT_OK;
+our @EXPORT_TAGS = ( Func=>[@EXPORT_OK] );
+
+our $VERSION = "0.5";
+$VERSION = eval $VERSION;
+
+use PDL;
+use PDL::Exporter;
+use Carp;
+
 use PDL::Types;
-  
+
 =head2 ridl
 
 =for usage 
