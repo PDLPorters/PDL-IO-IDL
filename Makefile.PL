@@ -1,6 +1,7 @@
 use ExtUtils::MakeMaker;
 use strict;
 use warnings;
+use PDL::Core::Dev;
 
 my $package_name = "PDL::IO::IDL";
 (my $repo = $package_name) =~ s#::#-#g;
@@ -11,6 +12,7 @@ WriteMakefile(
   AUTHOR => 'PerlDL Developers <pdl-general@lists.sourceforge.net>',
   CONFIGURE_REQUIRES => {
     'ExtUtils::MakeMaker' => 0,
+    'PDL' => '2.094',
   },
   PREREQ_PM => {
     'PDL' => '2.094',
@@ -29,3 +31,8 @@ WriteMakefile(
     },
   },
 );
+
+sub MY::postamble {
+  my $oneliner = PDL::Core::Dev::_oneliner(qq{exit if \$ENV{DESTDIR}; use PDL::Doc; eval { PDL::Doc::add_module(shift); }});
+  qq|\ninstall :: pure_install\n\t$oneliner \$(NAME)\n|;
+}
